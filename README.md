@@ -5,15 +5,16 @@
 ```
 npm i run-success-icon
 ```
-# 通过传入iconType字段，可获取不同的图标展示，目前包支持如下的好玩的图标展示。
+## 该包导出两个方法
+## 方法1、initRunIcon ：该方法通过传入iconType字段，可获取不同的图标展示，目前包支持如下的好玩的图标展示。
 # iconType为
 #               buddha是个佛祖;
 #               giraffe是长颈鹿;
 #               poetry是一首诗;
 #               beauty是一个美女;
+# 方法2、handlerRunConfig：通过新建文件runIconConfig(与src同级文件)并存放.txt文件即可自动生成自己想要的图案
 # 图标如下
-`````
-
+````
 /*
  *                        _oo0oo_
  *                       o8888888o

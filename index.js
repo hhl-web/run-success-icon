@@ -2,32 +2,35 @@
  * Author       : OBKoro1
  * Date         : 2020-07-15 21:32:18
  * LastEditors  : OBKoro1
- * LastEditTime : 2020-07-15 23:09:16
- * FilePath     : \reactc:\web-vue-案例\run-success-icon\index.js
+ * LastEditTime : 2020-07-16 22:09:15
+ * FilePath     : \reactc:\Users\86187\run-success-icon\index.js
  * Description  : 
  * https://github.com/OBKoro1
  */ 
 let fs = require('fs');
 let path = require('path');
 class RunSuccessIcon {
-  constructor(option={}) {
-    this.iconType = option.iconType || 'buddha';
-    this.dirs=path.resolve(__dirname,'img');
-    this.init();
+  initRunIcon(option={}) {
+    let data,iconType,dirs=path.resolve(__dirname,'img');
+    iconType = option.iconType || 'buddha';
+    let files=fs.readdirSync(dirs);
+    let str=files.map(file=>path.join(dirs,file)).filter(file=>file.includes(iconType)).join()
+    data=fs.readFileSync(str,'utf-8');
+    return data;
   }
-  init() {
-    let that = this;
-    fs.readdir(that.dirs, function(err, files) {
-      let arr=files.map(file=>path.join(that.dirs,file));
-      let str = arr.filter((file) => {
-        return file.includes(that.iconType);
-      }).join();
-      fs.readFile(str, 'utf8', function(err,data){
-        console.log(data);
-      })
-    })
+  handlerRunConfig(){
+    let data;
+    if(fs.existsSync(path.resolve(__dirname,'../../runIconConfig'))){
+      let dirs=path.resolve(__dirname,'../../runIconConfig');
+      let files=fs.readdirSync(dirs);
+      let file=files.map(file=>path.join(dirs,file)).join();
+      data=fs.readFileSync(file,'utf-8');
+    }
+    return data;
   }
 }
-module.exports=RunSuccessIcon;
+let obj=new RunSuccessIcon();
+exports.initRunIcon=obj.initRunIcon;
+exports.handlerRunConfig=obj.handlerRunConfig;
 
 
